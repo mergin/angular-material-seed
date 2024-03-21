@@ -8,7 +8,13 @@ const routes: Routes = [{
 {
     path: 'lazyFeature2',
     loadChildren: () => import('./lazy-feature2/lazy-feature2.module').then(m => m.LazyFeature2Module)
-}];
+},
+// {
+//     path: '',
+//     redirectTo: '/',
+//     pathMatch: 'full'
+// }
+];
 
 @NgModule({
     imports: [RouterModule.forRoot(routes)],

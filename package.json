@@ -8,7 +8,7 @@
         "build": "ng build",
         "build:aot": "ng build --aot",
         "watch": "ng build --watch --configuration development",
-        "test": "ng test",
+        "test": "ng test --code-coverage",
         "serve:ssr:angular-material-seed": "node dist/angular-material-seed/server/server.mjs"
     },
     "private": true,

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-lazy-feature2',
@@ -7,4 +8,9 @@ import { Component } from '@angular/core';
 })
 export class LazyFeature2Component {
 
+    constructor(private router: Router) { }
+
+    onButtonClick(): void {
+        this.router.navigate(['/']);
+    }
 }
