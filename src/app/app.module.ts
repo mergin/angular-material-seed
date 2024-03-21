@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 import { SharedModule } from './shared/shared.module';
+import { StoreModule } from '@ngrx/store';
 
 @NgModule({
     declarations: [
@@ -14,7 +15,8 @@ import { SharedModule } from './shared/shared.module';
     imports: [
         BrowserModule,
         AppRoutingModule,
-        SharedModule
+        SharedModule,
+        StoreModule.forRoot({}, {})
     ],
     providers: [
         provideClientHydration(),
