@@ -1,3 +1,17 @@
+<mat-toolbar>
+    <span>{{ title }}</span>
+    <a class="pill" routerLink="/lazyFeature" rel="noopener">
+        <span>Go to Lazy Feature</span>
+    </a>
+    <a class="pill" routerLink="/lazyFeature2" rel="noopener">
+        <span>Go to Lazy Feature 2</span>
+    </a>
+    <span class="example-spacer"></span>
+    <button mat-icon-button routerLink="/" class="example-icon home-icon" aria-label="icon-button with home icon">
+        <mat-icon>home</mat-icon>
+    </button>
+</mat-toolbar>
+
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
 <!-- * * * * * * * * * * * The content below * * * * * * * * * * * -->
 <!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * -->
@@ -205,16 +219,11 @@
             </svg>
             <h1>Hello, {{ title }}</h1>
             <p>Congratulations! Your app is running. 🎉</p>
+            <router-outlet></router-outlet>
         </div>
         <div class="divider" role="separator" aria-label="Divider"></div>
         <div class="right-side">
             <div class="pill-group">
-
-                <!-- custom link -->
-                <a class="pill" routerLink="/lazyFeature" rel="noopener">
-                    <span>Go to Lazy Feature</span>
-                </a>
-
                 @for (item of [
                 { title: 'Learn with Tutorials', link: 'https://angular.dev/tutorials' },
                 { title: 'CLI Docs', link: 'https://angular.dev/tools/cli' },
@@ -266,6 +275,3 @@
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
 <!-- * * * * * * * * * * End of Placeholder  * * * * * * * * * * * * -->
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-
-
-<router-outlet></router-outlet>
