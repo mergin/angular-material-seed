@@ -7,6 +7,7 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 
 import { SharedModule } from './shared/shared.module';
 import { StoreModule } from '@ngrx/store';
+import { counterReducer } from './_state/counter.reducer';
 
 @NgModule({
     declarations: [
@@ -16,7 +17,7 @@ import { StoreModule } from '@ngrx/store';
         BrowserModule,
         AppRoutingModule,
         SharedModule,
-        StoreModule.forRoot({}, {})
+        StoreModule.forRoot({ count: counterReducer })
     ],
     providers: [
         provideClientHydration(),
