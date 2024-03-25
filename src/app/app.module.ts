@@ -4,10 +4,9 @@ import { BrowserModule, provideClientHydration } from '@angular/platform-browser
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { StoreModule } from '@ngrx/store';
 
 import { SharedModule } from './shared/shared.module';
-import { StoreModule } from '@ngrx/store';
-import { counterReducer } from './_state/counter.reducer';
 
 @NgModule({
     declarations: [
@@ -17,7 +16,7 @@ import { counterReducer } from './_state/counter.reducer';
         BrowserModule,
         AppRoutingModule,
         SharedModule,
-        StoreModule.forRoot({ count: counterReducer })
+        StoreModule.forRoot({})
     ],
     providers: [
         provideClientHydration(),

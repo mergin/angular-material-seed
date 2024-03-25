@@ -1,33 +1,25 @@
-import { Component } from '@angular/core';
-import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs/internal/Observable';
-
-import { increment, decrement, reset } from './_state/counter.actions';
-import { FeatureState } from './_state';
+import { Component, OnInit } from '@angular/core';
+import { NavigationEnd, Router } from '@angular/router';
 
 @Component({
     selector: 'app-root',
     templateUrl: './app.component.html',
     styleUrl: './app.component.scss'
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
 
     title = 'angular-material-seed';
-    count$: Observable<number>;
+    showMain = true;
 
-    constructor(private store: Store<{ count: number }>) {
-        this.count$ = store.select('count');
-    }
+    constructor(private router: Router) { }
 
-    increment(): void {
-        this.store.dispatch(increment());
-    }
-
-    decrement(): void {
-        this.store.dispatch(decrement());
-    }
-
-    reset(): void {
-        this.store.dispatch(reset());
+    ngOnInit(): void {
+        this.router.events.subscribe(
+            (val) => {
+                if (val instanceof NavigationEnd) {
+                    this.showMain = (val.url == '/');
+                }
+            }
+        );
     }
 }

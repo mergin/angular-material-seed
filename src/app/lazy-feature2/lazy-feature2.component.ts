@@ -1,5 +1,11 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs/internal/Observable';
+import { Store } from '@ngrx/store';
+
+import { actions } from './_state/counter.actions';
+import { selectFeatureCounter } from './_state';
+// import { FeatureState } from './_state';
 
 @Component({
     selector: 'app-lazy-feature2',
@@ -8,7 +14,28 @@ import { Router } from '@angular/router';
 })
 export class LazyFeature2Component {
 
-    constructor(private router: Router) { }
+    title = 'Lazy Feature 2';
+    description = 'State management example';
+    count$: Observable<number>;
+
+    constructor(
+        private router: Router,
+        private store: Store
+    ) {
+        this.count$ = store.select(selectFeatureCounter);
+    }
+
+    increment(): void {
+        this.store.dispatch(actions.increment());
+    }
+
+    decrement(): void {
+        this.store.dispatch(actions.decrement());
+    }
+
+    reset(): void {
+        this.store.dispatch(actions.reset());
+    }
 
     onButtonClick(): void {
         this.router.navigate(['/']);

@@ -8,6 +8,9 @@ import { Router } from '@angular/router';
 })
 export class LazyFeatureComponent {
 
+    title = 'Lazy Feature 1';
+    description = 'HTTP service example';
+
     constructor(private router: Router) { }
 
     onButtonClick(): void {

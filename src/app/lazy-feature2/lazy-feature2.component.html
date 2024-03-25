@@ -1,6 +1,21 @@
-<h1>Lazy Feature 2</h1>
-<p>lazy-feature works!</p>
+<h1>{{ title }}</h1>
+<p>{{ description }}</p>
+
 <mat-divider></mat-divider>
+
+<section>
+    <div class="example-button-row">
+        <button (click)="increment()" mat-stroked-button color="primary">Increment</button>
+        <button (click)="decrement()" mat-stroked-button color="accent">Decrement</button>
+        <button (click)="reset()" mat-stroked-button color="warn">Reset Counter</button>
+    </div>
+    <div>
+        <h2>Current Count: {{ count$ | async }}</h2>
+    </div>
+</section>
+
+<mat-divider></mat-divider>
+
 <button (click)="onButtonClick()" mat-raised-button color="primary">
     Go Home
 </button>
