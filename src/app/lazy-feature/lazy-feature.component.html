@@ -3,6 +3,43 @@
 
 <mat-divider></mat-divider>
 
-<button (click)="onButtonClick()" mat-raised-button color="primary">
+<!-- TODO: add placeholder for async pipe -->
+<mat-grid-list cols="2"
+               rowHeight="2:1">
+    @for (photo of (photos$ | async); track photo.id; let idx = $index) {
+    <mat-grid-tile>
+        <div class="example-image-container">
+            <img class="example-image"
+                 [ngSrc]="photo.download_url"
+                 placeholder="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="
+                 alt="example-image"
+                 priority
+                 fill>
+        </div>
+    </mat-grid-tile>
+    } @empty {
+    <li> There are no items.</li>
+    }
+</mat-grid-list>
+
+<mat-divider></mat-divider>
+
+<!-- paginator -->
+<mat-paginator #paginator
+               class="demo-paginator"
+               (page)="onPageEvent($event)"
+               [length]="length"
+               [pageSize]="pageSize"
+               [showFirstLastButtons]="showFirstLastButtons"
+               [hidePageSize]="hidePageSize"
+               [pageIndex]="currentPage"
+               aria-label="Select page">
+</mat-paginator>
+
+<mat-divider></mat-divider>
+
+<button (click)="onButtonClick()"
+        mat-raised-button
+        color="primary">
     Go Home
 </button>
