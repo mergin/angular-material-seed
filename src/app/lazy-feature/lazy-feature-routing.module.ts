@@ -2,7 +2,9 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LazyFeatureComponent } from './lazy-feature.component';
 
-const routes: Routes = [{ path: '', component: LazyFeatureComponent }];
+const routes: Routes = [
+    { path: '', component: LazyFeatureComponent, title: 'lazyFeature' }
+];
 
 @NgModule({
     imports: [RouterModule.forChild(routes)],
