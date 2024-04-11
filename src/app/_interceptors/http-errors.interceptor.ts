@@ -68,7 +68,7 @@ export class HttpErrorsInterceptor implements HttpInterceptor {
     private handleHttpError(error: HttpErrorResponse): void {
         switch (error.status) {
             case 401:
-            console.error('Unauthorized request:', error);
+                console.error('Unauthorized request:', error);
                 break;
             case 500:
                 console.error('Server side error', error);
