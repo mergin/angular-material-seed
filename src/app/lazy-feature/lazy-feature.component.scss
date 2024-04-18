@@ -1,4 +1,11 @@
 .example-image {
-    object-fit: fill;
-    width: 100%;
+    position: static !important;
+    transition-property: transform;
+    transition-duration: 0.5s;
+    transition-timing-function: ease;
+    transition-delay: 0.0s;
+}
+
+.example-image:hover {
+    transform: scale(1.3);
 }
