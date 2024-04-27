@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 
 import { Photo } from '@app/_models';
 import { PhotoService } from '@app/_services/photo.service';
-import { Observable } from 'rxjs/internal/Observable';
+import { Observable, forkJoin } from 'rxjs';
 
 @Component({
     selector: 'app-lazy-feature',
@@ -30,7 +30,8 @@ export class LazyFeatureComponent implements OnInit {
     ) { }
 
     ngOnInit(): void {
-        this.photos$ = this.photoService.getPhotos(this.currentPage, this.pageSize);
+        // this.photos$ = this.photoService.getPhotoList(this.currentPage, this.pageSize);
+        this.photos$ = this.getPhotoList(this.pageSize);
     }
 
     onButtonClick(): void {
@@ -39,7 +40,14 @@ export class LazyFeatureComponent implements OnInit {
 
     onPageEvent(event: PageEvent): void {
         this.currentPage = event.pageIndex;
-        this.photos$ = this.photoService.getPhotos(this.currentPage, this.pageSize);
+        // this.photos$ = this.photoService.getPhotoList(this.currentPage, this.pageSize);
+        this.photos$ = this.getPhotoList(this.pageSize);
+    }
+
+    private getPhotoList(pageSize: number): Observable<Photo[]> {
+        return forkJoin(
+            [...Array(pageSize)].map(() => { return this.photoService.getPhoto(); })
+        );
     }
 
 }
