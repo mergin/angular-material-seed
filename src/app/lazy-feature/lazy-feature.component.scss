@@ -1,9 +1,13 @@
+.mat-grid-tile {
+    background: lightgray;
+}
+
 .example-image {
     position: static !important;
     transition-property: transform;
     transition-duration: 0.5s;
     transition-timing-function: ease;
-    transition-delay: 0.0s;
+    transition-delay: 0s;
 }
 
 .example-image:hover {
