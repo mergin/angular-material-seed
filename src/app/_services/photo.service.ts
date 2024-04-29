@@ -1,9 +1,9 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { PhotoAdapter } from '@app/_adapters';
 import { Photo } from '@app/_models';
 import { Observable } from 'rxjs/internal/Observable';
 import { map } from 'rxjs/operators';
+import { FactoryService } from './factory.service';
 
 @Injectable({
     providedIn: 'root'
@@ -14,7 +14,7 @@ export class PhotoService {
 
     constructor(
         private httpClient: HttpClient,
-        private photoAdapter: PhotoAdapter
+        private factoryService: FactoryService
     ) { }
 
     /**
@@ -30,7 +30,7 @@ export class PhotoService {
             .pipe(
                 map(
                     (response: Photo): Photo => {
-                        return this.photoAdapter.adapt(response);
+                        return this.factoryService.createPhoto(response);
                     }
                 )
             );
@@ -48,13 +48,13 @@ export class PhotoService {
             params: new HttpParams()
                 .set('page', `${page}`)
                 .set('limit', `${limit || 4}`)
-        };
+        } as const;
 
         return this.httpClient.get<Photo[]>(`${this.apiUrl}/v2/list`, options)
             .pipe(
                 map(
                     (response: Photo[]): Photo[] => {
-                        return this.photoAdapter.adaptMap(response);
+                        return response.map((elem) => this.factoryService.createPhoto(elem)) || [];
                     }
                 )
             );
