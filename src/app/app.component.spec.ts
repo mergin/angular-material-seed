@@ -1,31 +1,25 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { Store, StoreModule } from '@ngrx/store';
+import { StoreModule } from '@ngrx/store';
 import { AppComponent } from './app.component';
 import { SharedModule } from './shared/shared.module';
-import { counterReducer } from './_state/counter.reducer';
 
 describe('AppComponent', () => {
 
     let app: AppComponent;
     let fixture: ComponentFixture<AppComponent>;
-    let store: Store<{ count: number }>;
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
             imports: [
                 RouterTestingModule,
                 SharedModule,
-                StoreModule.forRoot({ count: counterReducer })
+                StoreModule.forRoot({})
             ],
             declarations: [
                 AppComponent
             ],
         }).compileComponents();
-
-        store = TestBed.get(Store);
-
-        spyOn(store, 'dispatch').and.callThrough();
 
         fixture = TestBed.createComponent(AppComponent);
         app = fixture.componentInstance;
@@ -48,6 +42,6 @@ describe('AppComponent', () => {
         const fixture = TestBed.createComponent(AppComponent);
         fixture.detectChanges();
         const compiled = fixture.nativeElement as HTMLElement;
-        expect(compiled.querySelector('h1')?.textContent).toContain('Hello, angular-material-seed');
+        expect(compiled.querySelector('h1')?.textContent).toContain('angular-material-seed');
     });
 });

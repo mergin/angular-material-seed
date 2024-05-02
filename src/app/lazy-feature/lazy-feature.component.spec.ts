@@ -2,6 +2,8 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { LazyFeatureComponent } from './lazy-feature.component';
 import { SharedModule } from '@app/shared/shared.module';
+import { PhotoService } from '@app/_services/photo.service';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('LazyFeatureComponent', () => {
     let component: LazyFeatureComponent;
@@ -10,8 +12,10 @@ describe('LazyFeatureComponent', () => {
     beforeEach(async () => {
         await TestBed.configureTestingModule({
             imports: [
+                HttpClientTestingModule,
                 SharedModule
             ],
+            providers: [PhotoService],
             declarations: [LazyFeatureComponent]
         })
             .compileComponents();
