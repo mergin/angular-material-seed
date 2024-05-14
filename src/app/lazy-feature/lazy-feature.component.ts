@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { MatGridList } from '@angular/material/grid-list';
 import { PageEvent } from '@angular/material/paginator';
 import { Router } from '@angular/router';
 
@@ -12,6 +13,8 @@ import { Observable, forkJoin } from 'rxjs';
     styleUrl: './lazy-feature.component.scss'
 })
 export class LazyFeatureComponent implements OnInit {
+
+    @ViewChild('photoGridList') photoGridList!: ElementRef<MatGridList>;
 
     title = 'Lazy Feature 1';
     description = 'HTTP service example';
@@ -32,6 +35,10 @@ export class LazyFeatureComponent implements OnInit {
     ngOnInit(): void {
         // this.photos$ = this.photoService.getPhotoList(this.currentPage, this.pageSize);
         this.photos$ = this.getPhotoList(this.pageSize);
+    }
+
+    ngAfterViewInit(): void {
+        console.log('photoGridList', this.photoGridList.nativeElement);
     }
 
     onButtonClick(): void {

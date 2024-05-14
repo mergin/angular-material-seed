@@ -5,7 +5,8 @@
 
 <!-- TODO: add placeholder for async pipe -->
 <mat-grid-list cols="2"
-               rowHeight="2:1">
+               rowHeight="2:1"
+               #photoGridList>
     @for (photo of (photos$ | async); track photo.id; let idx = $index) {
     <mat-grid-tile>
         <div class="example-image-container">
