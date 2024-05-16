@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 
 import { Photo } from '@app/_models';
 import { PhotoService } from '@app/_services/photo.service';
-import { Observable, forkJoin } from 'rxjs';
+import { Observable, combineLatest } from 'rxjs';
 
 @Component({
     selector: 'app-lazy-feature',
@@ -52,7 +52,7 @@ export class LazyFeatureComponent implements OnInit {
     }
 
     private getPhotoList(pageSize: number): Observable<Photo[]> {
-        return forkJoin(
+        return combineLatest(
             [...Array(pageSize)].map(() => { return this.photoService.getPhoto(); })
         );
     }
