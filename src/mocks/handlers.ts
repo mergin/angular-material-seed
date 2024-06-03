@@ -19,7 +19,7 @@ const getPhoto: HttpHandler = http.get<GetPhotoParams, Photo>(
 
         return HttpResponse.json({
             author: 'Jonas Eriksson',
-            download_url: `https://picsum.photos/id/${params.seed}/2509/1673`,
+            download_url: `https://picsum.photos/id/${params.seed}/2000/1500`,
             height: 1673,
             id: params.seed,
             url: 'https://unsplash.com/photos/BeD3vjQ8SI0',
