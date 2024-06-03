@@ -1,4 +1,5 @@
 #!/bin/sh
 
+npx eslint src/
 # npm test
 # exit 1

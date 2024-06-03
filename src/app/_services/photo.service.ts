@@ -1,5 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+
+import { environment } from '@env/environment';
 import { Photo } from '@app/_models';
 import { Observable } from 'rxjs/internal/Observable';
 import { map } from 'rxjs/operators';
@@ -10,7 +12,7 @@ import { FactoryService } from './factory.service';
 })
 export class PhotoService {
 
-    private readonly apiUrl: string = 'https://picsum.photos';
+    private readonly apiUrl: string = environment.apiUrl;
 
     constructor(
         private httpClient: HttpClient,
