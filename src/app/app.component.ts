@@ -1,8 +1,21 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { NavigationEnd, Router } from '@angular/router';
+import { NavigationEnd, Router, RouterLink, RouterOutlet } from '@angular/router';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { CommonModule } from '@angular/common';
 
 @Component({
+    standalone: true,
+    imports: [
+        CommonModule,
+        RouterLink,
+        RouterOutlet,
+        MatToolbarModule,
+        MatIconModule,
+        MatButtonModule,
+    ],
     selector: 'app-root',
     templateUrl: './app.component.html',
     styleUrl: './app.component.scss'

@@ -1,8 +1,8 @@
-import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
-
-import { worker } from './mocks/browser';
+import { bootstrapApplication } from '@angular/platform-browser';
 import { environment } from '@env/environment';
-import { AppModule } from './app/app.module';
+import { AppComponent } from '@app/app.component';
+import { appConfig } from '@app/app.config';
+import { worker } from './mocks/browser';
 
 async function enableMocking() {
     if (environment.production) {
@@ -14,16 +14,9 @@ async function enableMocking() {
     return worker.start();
 }
 
-// worker.start().then(
-//     () => {
-//         platformBrowserDynamic().bootstrapModule(AppModule)
-//             .catch(err => console.error(err));
-//     }
-// );
-
 enableMocking().then(
     () => {
-        platformBrowserDynamic().bootstrapModule(AppModule)
-            .catch(err => console.error(err));
+        bootstrapApplication(AppComponent, appConfig)
+            .catch((err) => console.error(err));
     }
 );

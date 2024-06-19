@@ -5,9 +5,18 @@ import { Store } from '@ngrx/store';
 
 import { actions } from './_state/counter.actions';
 import { selectFeatureCounter } from './_state';
+import { CommonModule } from '@angular/common';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDividerModule } from '@angular/material/divider';
 // import { FeatureState } from './_state';
 
 @Component({
+    standalone: true,
+    imports: [
+        CommonModule,
+        MatButtonModule,
+        MatDividerModule,
+    ],
     selector: 'app-lazy-feature2',
     templateUrl: './lazy-feature2.component.html',
     styleUrl: './lazy-feature2.component.scss'

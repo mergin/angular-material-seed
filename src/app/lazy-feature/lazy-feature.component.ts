@@ -1,6 +1,9 @@
+import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { MatGridList } from '@angular/material/grid-list';
-import { PageEvent } from '@angular/material/paginator';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatGridList, MatGridListModule } from '@angular/material/grid-list';
+import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 import { Router } from '@angular/router';
 
 import { Photo } from '@app/_models';
@@ -8,6 +11,15 @@ import { PhotoService } from '@app/_services/photo.service';
 import { Observable, combineLatest } from 'rxjs';
 
 @Component({
+    standalone: true,
+    imports: [
+        CommonModule,
+        NgOptimizedImage,
+        MatButtonModule,
+        MatDividerModule,
+        MatGridListModule,
+        MatPaginatorModule
+    ],
     selector: 'app-lazy-feature',
     templateUrl: './lazy-feature.component.html',
     styleUrl: './lazy-feature.component.scss'
