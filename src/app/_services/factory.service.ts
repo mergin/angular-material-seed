@@ -8,14 +8,14 @@ export class FactoryService {
 
     constructor() { }
 
-    createPhoto(item: unknown): Photo {
+    createPhoto(item = {} as Partial<Photo>): Photo {
         return Object.freeze(new Photo(
-            (item as Photo).id,
-            (item as Photo).author,
-            (item as Photo).width,
-            (item as Photo).height,
-            (item as Photo).url,
-            (item as Photo).download_url
+            item.id,
+            item.author,
+            item.width,
+            item.height,
+            item.url,
+            item.download_url
         ));
     }
 }
