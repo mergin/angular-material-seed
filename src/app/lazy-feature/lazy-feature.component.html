@@ -7,6 +7,7 @@
 <mat-grid-list cols="2"
                rowHeight="2:1"
                #photoGridList>
+    <!-- @for (photo of photos(); track photo.id; let idx = $index) { -->
     @for (photo of (photos$ | async); track photo.id; let idx = $index) {
     <mat-grid-tile>
         <div class="example-image-container">
@@ -26,14 +27,14 @@
 <mat-divider></mat-divider>
 
 <!-- paginator -->
-<mat-paginator #paginator
+<mat-paginator #matPaginator
                class="demo-paginator"
                (page)="onPageEvent($event)"
-               [length]="length"
-               [pageSize]="pageSize"
-               [showFirstLastButtons]="showFirstLastButtons"
-               [hidePageSize]="hidePageSize"
-               [pageIndex]="currentPage"
+               [length]="paginator.length"
+               [pageSize]="paginator.pageSize"
+               [showFirstLastButtons]="paginator.showFirstLastButtons"
+               [hidePageSize]="paginator.hidePageSize"
+               [pageIndex]="paginator.currentPage"
                aria-label="Select page">
 </mat-paginator>
 
