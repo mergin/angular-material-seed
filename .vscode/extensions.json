@@ -4,6 +4,9 @@
         "angular.ng-template",
         "dbaeumer.vscode-eslint",
         "eamodio.gitlens",
-        "EditorConfig.EditorConfig"
+        "EditorConfig.EditorConfig",
+        "streetsidesoftware.code-spell-checker",
+        "pflannery.vscode-versionlens",
+        "wayou.vscode-todo-highlight"
     ]
 }
