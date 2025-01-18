@@ -1,28 +1,35 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { provideHttpClient } from '@angular/common/http';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 
 import { LazyFeatureComponent } from './lazy-feature.component';
-import { SharedModule } from '@app/shared/shared.module';
 import { PhotoService } from '@app/_services/photo.service';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('LazyFeatureComponent', () => {
     let component: LazyFeatureComponent;
     let fixture: ComponentFixture<LazyFeatureComponent>;
+    let photoService: PhotoService;
+    let componentPhotoService: PhotoService;
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            imports: [
-                HttpClientTestingModule,
-                SharedModule
+            imports: [],
+            providers: [
+                provideHttpClient(),
+                provideHttpClientTesting(),
             ],
-            providers: [PhotoService],
-            declarations: [LazyFeatureComponent]
         })
             .compileComponents();
 
         fixture = TestBed.createComponent(LazyFeatureComponent);
+        fixture.autoDetectChanges();
         component = fixture.componentInstance;
-        fixture.detectChanges();
+
+        // UserService actually injected into the component
+        photoService = fixture.debugElement.injector.get(PhotoService);
+        componentPhotoService = photoService;
+        // UserService from the root injector
+        photoService = TestBed.inject(PhotoService);
     });
 
     it('should create', () => {

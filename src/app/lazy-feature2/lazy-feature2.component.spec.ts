@@ -2,7 +2,6 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Store, StoreModule, combineReducers } from '@ngrx/store';
 
 import { LazyFeature2Component } from './lazy-feature2.component';
-import { SharedModule } from '@app/shared/shared.module';
 import { counterFeature } from './_state';
 
 describe('LazyFeature2Component', () => {
@@ -13,10 +12,8 @@ describe('LazyFeature2Component', () => {
     beforeEach(async () => {
         await TestBed.configureTestingModule({
             imports: [
-                SharedModule,
                 StoreModule.forRoot({ feature: combineReducers(counterFeature.reducer) })
             ],
-            declarations: [LazyFeature2Component]
         })
             .compileComponents();
 

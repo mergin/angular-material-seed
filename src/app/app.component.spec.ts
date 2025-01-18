@@ -1,8 +1,10 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { RouterTestingModule } from '@angular/router/testing';
+import { provideRouter } from '@angular/router';
 import { StoreModule } from '@ngrx/store';
+
 import { AppComponent } from './app.component';
-import { SharedModule } from './shared/shared.module';
+import { appConfig } from './app.config';
+import { routes } from './app.routes';
 
 describe('AppComponent', () => {
 
@@ -10,25 +12,29 @@ describe('AppComponent', () => {
     let fixture: ComponentFixture<AppComponent>;
 
     beforeEach(async () => {
-        await TestBed.configureTestingModule({
-            imports: [
-                RouterTestingModule,
-                SharedModule,
-                StoreModule.forRoot({})
-            ],
-            declarations: [
-                AppComponent
-            ],
-        }).compileComponents();
+        // await TestBed.configureTestingModule({
+        //     imports: [
+        //         RouterTestingModule,
+        //         StoreModule.forRoot({})
+        //     ],
+        // }).compileComponents();
+        TestBed.configureTestingModule(
+            Object.assign({}, appConfig, {
+                imports: [StoreModule.forRoot({})],
+                providers: [
+                    provideRouter(routes),
+                ],
+            }),
+        );
 
         fixture = TestBed.createComponent(AppComponent);
+        fixture.autoDetectChanges();
         app = fixture.componentInstance;
-        fixture.detectChanges();
     });
 
     it('should create the app', () => {
-        // const fixture = TestBed.createComponent(AppComponent);
-        // const app = fixture.componentInstance;
+        const fixture = TestBed.createComponent(AppComponent);
+        const app = fixture.componentInstance;
         expect(app).toBeTruthy();
     });
 
