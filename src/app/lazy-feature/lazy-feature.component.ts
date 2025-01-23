@@ -1,15 +1,15 @@
 import { CommonModule, NgOptimizedImage } from '@angular/common';
-import { Component, DestroyRef, OnInit, viewChild } from '@angular/core';
+import { Component, DestroyRef, inject, OnInit, viewChild } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatGridList, MatGridListModule } from '@angular/material/grid-list';
 import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 import { Router } from '@angular/router';
+import { Observable, combineLatest } from 'rxjs';
 
 import { Photo } from '@app/_models';
 import { PhotoService } from '@app/_services/photo.service';
-import { Observable, combineLatest } from 'rxjs';
 
 interface Paginator {
     currentPage: number;
@@ -50,11 +50,12 @@ export class LazyFeatureComponent implements OnInit {
     photos$ = this.getPhotoList(this.paginator.pageSize);
 
     private readonly photoGridList = viewChild.required<MatGridList>('photoGridList');
+    // private readonly photoService = inject(PhotoService);
+    private readonly router = inject(Router);
 
     constructor(
-        private router: Router,
-        private photoService: PhotoService,
-        private destroyRef: DestroyRef
+        private readonly photoService: PhotoService,
+        private readonly destroyRef: DestroyRef
     ) { }
 
     ngOnInit(): void {

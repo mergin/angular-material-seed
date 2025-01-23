@@ -1,5 +1,5 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 
 import { environment } from '@env/environment';
 import { Photo } from '@app/_models';
@@ -13,11 +13,10 @@ import { FactoryService } from './factory.service';
 export class PhotoService {
 
     private readonly apiUrl: string = environment.apiUrl;
+    private readonly httpClient = inject(HttpClient);
+    private readonly factoryService = inject(FactoryService);
 
-    constructor(
-        private httpClient: HttpClient,
-        private factoryService: FactoryService
-    ) { }
+    constructor() { }
 
     /**
      * Makes a Photo detail request to public photo api

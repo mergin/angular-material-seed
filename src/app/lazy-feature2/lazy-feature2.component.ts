@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDividerModule } from '@angular/material/divider';
 import { Observable } from 'rxjs/internal/Observable';
 import { Store } from '@ngrx/store';
 
 import { actions } from './_state/counter.actions';
 import { selectFeatureCounter } from './_state';
-import { CommonModule } from '@angular/common';
-import { MatButtonModule } from '@angular/material/button';
-import { MatDividerModule } from '@angular/material/divider';
 // import { FeatureState } from './_state';
 
 @Component({
