@@ -4,6 +4,6 @@
 
 export const environment = {
     production: false,
-    apiUrl: '',
+    apiUrl: 'https://picsum.photos',
     debug: true
 };
