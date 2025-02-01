@@ -8,8 +8,8 @@ import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 import { Router } from '@angular/router';
 import { Observable, combineLatest } from 'rxjs';
 
-import { Photo } from '@app/_models';
-import { PhotoService } from '@app/_services/photo.service';
+import { Photo } from '@app/core/models';
+import { PhotoService } from '@app/core/services';
 
 interface Paginator {
     currentPage: number;
@@ -52,11 +52,9 @@ export class LazyFeatureComponent implements OnInit {
     private readonly photoGridList = viewChild.required<MatGridList>('photoGridList');
     // private readonly photoService = inject(PhotoService);
     private readonly router = inject(Router);
+    private readonly destroyRef = inject(DestroyRef);
 
-    constructor(
-        private readonly photoService: PhotoService,
-        private readonly destroyRef: DestroyRef
-    ) { }
+    constructor(private readonly photoService: PhotoService) {}
 
     ngOnInit(): void {
         // this.photos$ = this.photoService.getPhotoList(this.currentPage, this.pageSize);

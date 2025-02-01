@@ -1,5 +1,5 @@
 import { ApplicationConfig, importProvidersFrom, provideZoneChangeDetection } from '@angular/core';
-import { PreloadAllModules, provideRouter, withDebugTracing, withPreloading } from '@angular/router';
+import { PreloadAllModules, provideRouter, withPreloading } from '@angular/router';
 import { provideClientHydration } from '@angular/platform-browser';
 import { StoreModule } from '@ngrx/store';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
@@ -7,7 +7,7 @@ import { HTTP_INTERCEPTORS, provideHttpClient, withFetch, withInterceptorsFromDi
 
 import { routes } from './app.routes';
 import { counterFeature } from './lazy-feature2/_state';
-import { HttpErrorsInterceptor } from './_interceptors/http-errors.interceptor';
+import { HttpErrorsInterceptor } from './core/interceptors/http-errors.interceptor';
 
 export const appConfig: ApplicationConfig = {
     providers: [

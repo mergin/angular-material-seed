@@ -1,5 +1,5 @@
 import { http, HttpHandler, HttpResponse } from 'msw';
-import { Photo } from '../app/_models';
+import { Photo } from '@app/core/models';
 
 type GetPhotoParams = {
     seed: string

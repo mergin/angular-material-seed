@@ -1,10 +1,10 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-
-import { environment } from '@env/environment';
-import { Photo } from '@app/_models';
 import { Observable } from 'rxjs/internal/Observable';
 import { map } from 'rxjs/operators';
+
+import { Photo } from '@app/core/models';
+import { environment } from '@env/environment';
 import { FactoryService } from './factory.service';
 
 @Injectable({

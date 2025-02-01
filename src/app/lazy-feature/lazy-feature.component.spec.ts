@@ -1,32 +1,44 @@
-import { ComponentFixture, fakeAsync, TestBed, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideHttpClient } from '@angular/common/http';
-import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { provideRouter } from '@angular/router';
+import { defer } from 'rxjs';
 
-import { LazyFeatureComponent } from './lazy-feature.component';
-import { PhotoService } from '@app/_services/photo.service';
 import { routes } from '@app/app.routes';
-import { defer, Observable, of } from 'rxjs';
-import { Photo } from '@app/_models';
-import { FactoryService } from '@app/_services/factory.service';
+import { Photo } from '@app/core/models';
+import { PhotoService, FactoryService } from '@app/core/services';
+import { LazyFeatureComponent } from './lazy-feature.component';
 
 export function asyncData<T>(data: T) {
     return defer(() => Promise.resolve(data));
+}
+
+class PhotoServiceSpy {
+    photoId = 4200;
+    testPhoto: Photo = {
+        author: 'Jonas Eriksson',
+        download_url: `https://picsum.photos/id/${this.photoId}/2000/1500`,
+        height: 1673,
+        id: this.photoId,
+        url: 'https://unsplash.com/photos/BeD3vjQ8SI0',
+        width: 2509
+    };
+
+    /* emit cloned test photo */
+    getPhoto = jasmine
+        .createSpy('getPhoto')
+        .and.callFake(() => asyncData(Object.assign({}, this.testPhoto)));
 }
 
 describe('LazyFeatureComponent', () => {
     let component: LazyFeatureComponent;
     let fixture: ComponentFixture<LazyFeatureComponent>;
     let photoService: PhotoService;
-    let componentPhotoService: PhotoService;
-    let getPhotoSpy: jasmine.Spy<(seed?: number) => Observable<Photo>>;
-    let testPhoto: Photo;
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
             imports: [LazyFeatureComponent],
             providers: [
-                PhotoService,
+                { provide: PhotoService, useClass: PhotoServiceSpy },
                 FactoryService,
                 provideHttpClient(),
                 provideRouter(routes)
@@ -36,30 +48,10 @@ describe('LazyFeatureComponent', () => {
         fixture = TestBed.createComponent(LazyFeatureComponent);
         component = fixture.componentInstance;
         fixture.autoDetectChanges();
-        testPhoto = new Photo();
-
-        // {
-        //     author: 'Jonas Eriksson',
-        //     download_url: `https://picsum.photos/id/${params.seed}/2000/1500`,
-        //     height: 1673,
-        //     id: params.seed,
-        //     url: 'https://unsplash.com/photos/BeD3vjQ8SI0',
-        //     width: 2509
-        // }
-
-        // UserService actually injected into the component
-        photoService = fixture.debugElement.injector.get(PhotoService);
-        componentPhotoService = photoService;
 
         // UserService from the root injector
         photoService = TestBed.inject(PhotoService);
-        // Make the spy return a synchronous Observable with the test data
-        getPhotoSpy = spyOn(photoService, 'getPhoto').and.returnValue(asyncData(testPhoto));
     });
-
-    // beforeEach(() => {
-
-    // });
 
     it('should create', () => {
         fixture.detectChanges(); // ngOnInit()
