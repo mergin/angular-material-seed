@@ -1,12 +1,23 @@
 import { CommonModule, NgOptimizedImage } from '@angular/common';
-import { Component, DestroyRef, inject, OnInit, viewChild } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import {
+    ChangeDetectionStrategy,
+    Component,
+    DestroyRef,
+    inject,
+    OnInit,
+    signal,
+    Signal,
+    viewChild,
+    WritableSignal
+} from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatGridList, MatGridListModule } from '@angular/material/grid-list';
 import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 import { Router } from '@angular/router';
 import { Observable, combineLatest } from 'rxjs';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { derivedAsync } from 'ngxtension/derived-async';
 
 import { Photo } from '@app/core/models';
 import { PhotoService } from '@app/core/services';
@@ -31,37 +42,32 @@ interface Paginator {
     ],
     selector: 'app-lazy-feature',
     templateUrl: './lazy-feature.component.html',
-    styleUrl: './lazy-feature.component.scss'
+    styleUrl: './lazy-feature.component.scss',
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class LazyFeatureComponent implements OnInit {
+export class LazyFeatureComponent {
 
     title = 'Lazy Feature 1';
     description = 'HTTP service example';
+    photos: Signal<Photo[]>;
 
-    paginator: Paginator = {
+    paginator: WritableSignal<Paginator> = signal({
         currentPage: 0,
         pageSize: 4,
         length: 100,
         hidePageSize: false,
         showFirstLastButtons: true,
-    }
-
-    // TODO: refactor to signals
-    photos$ = this.getPhotoList(this.paginator.pageSize);
+    })
 
     private readonly photoGridList = viewChild.required<MatGridList>('photoGridList');
-    // private readonly photoService = inject(PhotoService);
+    private readonly photoService = inject(PhotoService);
     private readonly router = inject(Router);
     private readonly destroyRef = inject(DestroyRef);
 
-    constructor(private readonly photoService: PhotoService) {}
-
-    ngOnInit(): void {
-        // this.photos$ = this.photoService.getPhotoList(this.currentPage, this.pageSize);
-    }
-
-    ngAfterViewInit(): void {
-        console.log('photoGridList ', this.photoGridList());
+    constructor() {
+        this.photos = derivedAsync(() =>
+            this.getPhotoList(this.paginator().currentPage, this.paginator().pageSize), { initialValue: [] }
+        );
     }
 
     onButtonClick(): void {
@@ -69,15 +75,20 @@ export class LazyFeatureComponent implements OnInit {
     }
 
     onPageEvent(event: PageEvent): void {
-        this.paginator.currentPage = event.pageIndex;
-        this.photos$ = this.getPhotoList(this.paginator.pageSize);
+        this.paginator.set({
+            ...this.paginator(),
+            currentPage: event.pageIndex
+        });
     }
 
-    private getPhotoList(pageSize: number): Observable<Photo[]> {
+    private getPhotoList(page: number, pageSize: number): Observable<Photo[]> {
         return combineLatest(
-            [...Array(pageSize)].map(() => { return this.photoService.getPhoto(); })
-        ).pipe(
-            takeUntilDestroyed(this.destroyRef)
-        );
+            [...Array(pageSize)].map((_, index) => {
+
+                // generate seed to mimic paging use
+                const seed = Math.random() * (page + 1) * 100 * (index + 1);
+                return this.photoService.getPhoto(seed);
+            })
+        ).pipe(takeUntilDestroyed(this.destroyRef));
     }
 }
