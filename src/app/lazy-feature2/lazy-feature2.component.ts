@@ -1,10 +1,10 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, Signal } from '@angular/core';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
-import { Observable } from 'rxjs/internal/Observable';
 import { Store } from '@ngrx/store';
+import { toSignal } from '@angular/core/rxjs-interop';
 
 import { actions } from './_state/counter.actions';
 import { selectFeatureCounter } from './_state';
@@ -19,17 +19,18 @@ import { selectFeatureCounter } from './_state';
     ],
     selector: 'app-lazy-feature2',
     templateUrl: './lazy-feature2.component.html',
-    styleUrl: './lazy-feature2.component.scss'
+    styleUrl: './lazy-feature2.component.scss',
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LazyFeature2Component {
 
-    count$: Observable<number>;
+    count: Signal<number>;
 
-    constructor(
-        private router: Router,
-        private store: Store
-    ) {
-        this.count$ = store.select(selectFeatureCounter);
+    private readonly router = inject(Router);
+    private readonly store = inject(Store);
+
+    constructor() {
+        this.count = toSignal(this.store.select(selectFeatureCounter), { initialValue: 0 });
     }
 
     increment(): void {

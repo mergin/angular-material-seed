@@ -21,14 +21,7 @@ import { derivedAsync } from 'ngxtension/derived-async';
 
 import { Photo } from '@app/core/models';
 import { PhotoService } from '@app/core/services';
-
-interface Paginator {
-    currentPage: number;
-    pageSize: number;
-    length: number;
-    hidePageSize: boolean;
-    showFirstLastButtons: boolean;
-}
+import { Paginator } from './lazy-feature.types';
 
 @Component({
     standalone: true,
