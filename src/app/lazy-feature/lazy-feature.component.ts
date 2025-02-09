@@ -47,10 +47,7 @@ interface Paginator {
 })
 export class LazyFeatureComponent {
 
-    title = 'Lazy Feature 1';
-    description = 'HTTP service example';
     photos: Signal<Photo[]>;
-
     paginator: WritableSignal<Paginator> = signal({
         currentPage: 0,
         pageSize: 4,

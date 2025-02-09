@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+  <file source-language="en-US" datatype="plaintext" original="ng2.template">
+    <body>
+      <trans-unit id="pages.lazyFeature2Title" datatype="html">
+        <source>Lazy Feature 2</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/lazy-feature2/lazy-feature2.component.html</context>
+          <context context-type="linenumber">1,2</context>
+        </context-group>
+        <note priority="1" from="description"> description for title</note>
+        <note priority="1" from="meaning">Lazy Feature 2 page title </note>
+      </trans-unit>
+      <trans-unit id="pages.lazyFeature2Description" datatype="html">
+        <source>State management example</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/lazy-feature2/lazy-feature2.component.html</context>
+          <context context-type="linenumber">2,8</context>
+        </context-group>
+        <note priority="1" from="description"> description</note>
+        <note priority="1" from="meaning">Lazy Feature 2 page description </note>
+      </trans-unit>
+      <trans-unit id="pages.lazyFeature1Title" datatype="html">
+        <source>Lazy Feature 1</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/lazy-feature/lazy-feature.component.html</context>
+          <context context-type="linenumber">1,2</context>
+        </context-group>
+        <note priority="1" from="description"> description for title</note>
+        <note priority="1" from="meaning">Lazy Feature 1 page title </note>
+      </trans-unit>
+      <trans-unit id="pages.lazyFeature1Description" datatype="html">
+        <source>HTTP service example</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/lazy-feature/lazy-feature.component.html</context>
+          <context context-type="linenumber">2,7</context>
+        </context-group>
+        <note priority="1" from="description"> description</note>
+        <note priority="1" from="meaning">Lazy Feature 1 page description </note>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

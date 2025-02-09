@@ -23,8 +23,6 @@ import { selectFeatureCounter } from './_state';
 })
 export class LazyFeature2Component {
 
-    title = 'Lazy Feature 2';
-    description = 'State management example';
     count$: Observable<number>;
 
     constructor(

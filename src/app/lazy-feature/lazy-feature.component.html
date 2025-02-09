@@ -1,13 +1,11 @@
-<h1>{{ title }}</h1>
-<p>{{ description }}</p>
+<h1 i18n="Lazy Feature 1 page title | description for title@@pages.lazyFeature1Title">Lazy Feature 1</h1>
+<p i18n="Lazy Feature 1 page description | description@@pages.lazyFeature1Description">HTTP service example</p>
 
 <mat-divider></mat-divider>
 
-<!-- TODO: add placeholder for async pipe -->
 <mat-grid-list cols="2"
                rowHeight="2:1"
                #photoGridList>
-    <!-- @for (photo of photos(); track photo.id; let idx = $index) { -->
     @for (photo of photos(); track photo.id; let idx = $index) {
     <mat-grid-tile>
         <div class="example-image-container">
