@@ -1,4 +1,4 @@
 #!/bin/sh
 
-# npm test
+npm test
 # npx eslint src/

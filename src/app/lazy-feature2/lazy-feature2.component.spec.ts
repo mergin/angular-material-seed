@@ -3,17 +3,7 @@ import { Store, StoreModule, combineReducers } from '@ngrx/store';
 
 import { LazyFeature2Component } from './lazy-feature2.component';
 import { counterFeature } from './_state';
-import { asyncData } from '@app/core/utils';
-
-class StoreSpy {
-    testCounter = 0;
-
-    select = jasmine
-        .createSpy('select')
-        .and.callFake((counterFeature) => asyncData(this.testCounter));
-
-    dispatch = () => {};
-}
+import { StoreSpy } from '@app/shared/test';
 
 describe('LazyFeature2Component', () => {
     let component: LazyFeature2Component;
