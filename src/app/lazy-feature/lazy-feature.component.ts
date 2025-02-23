@@ -4,7 +4,6 @@ import {
     Component,
     DestroyRef,
     inject,
-    OnInit,
     signal,
     Signal,
     viewChild,
@@ -47,7 +46,7 @@ export class LazyFeatureComponent {
         length: 100,
         hidePageSize: false,
         showFirstLastButtons: true,
-    })
+    });
 
     private readonly photoGridList = viewChild.required<MatGridList>('photoGridList');
     private readonly photoService = inject(PhotoService);

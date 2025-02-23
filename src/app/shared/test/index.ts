@@ -12,5 +12,5 @@ export const TEST_PHOTO = (photoId: number): Photo => {
         id: photoId,
         url: 'https://unsplash.com/photos/BeD3vjQ8SI0',
         width: 2509
-    }
+    };
 };

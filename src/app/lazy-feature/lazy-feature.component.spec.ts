@@ -10,7 +10,6 @@ import { PhotoServiceSpy } from '@app/shared/test';
 describe('LazyFeatureComponent', () => {
     let component: LazyFeatureComponent;
     let fixture: ComponentFixture<LazyFeatureComponent>;
-    let photoService: PhotoService;
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
@@ -28,7 +27,7 @@ describe('LazyFeatureComponent', () => {
         fixture.autoDetectChanges();
 
         // UserService from the root injector
-        photoService = TestBed.inject(PhotoService);
+        TestBed.inject(PhotoService);
     });
 
     it('should create', () => {

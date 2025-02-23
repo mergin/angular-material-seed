@@ -43,7 +43,9 @@ export class AppComponent implements OnInit {
                 (val) => {
                     if (val instanceof NavigationEnd) {
                         this.showMain = (val.url == '/');
-                        this.showMain && this.titleService.setTitle(this.title);
+                        if (this.showMain) {
+                            this.titleService.setTitle(this.title);
+                        }
                     }
                 }
             );

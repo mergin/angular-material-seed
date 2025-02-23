@@ -8,7 +8,7 @@ import { routes } from './app.routes';
 
 describe('AppComponent', () => {
 
-    let app: AppComponent;
+    // let app: AppComponent;
     let fixture: ComponentFixture<AppComponent>;
 
     beforeEach(async () => {
@@ -29,7 +29,7 @@ describe('AppComponent', () => {
 
         fixture = TestBed.createComponent(AppComponent);
         fixture.autoDetectChanges();
-        app = fixture.componentInstance;
+        // app = fixture.componentInstance;
     });
 
     it('should create the app', () => {

@@ -9,7 +9,6 @@ import { FactoryServiceSpy } from '@app/shared/test';
 
 describe('PhotoService', () => {
     let httpClientSpy: jasmine.SpyObj<HttpClient>;
-    let httpTesting: HttpTestingController;
     let service: PhotoService;
 
     beforeEach(() => {
@@ -23,7 +22,7 @@ describe('PhotoService', () => {
             ],
         });
 
-        httpTesting = TestBed.inject(HttpTestingController);
+        TestBed.inject(HttpTestingController);
         service = TestBed.inject(PhotoService);
     });
 
@@ -51,7 +50,7 @@ describe('PhotoService', () => {
         });
         httpClientSpy.get.and.returnValue(asyncError(errorResponse));
         service.getPhoto().subscribe({
-            next: (photo) => done.fail('expected an error, not heroes'),
+            next: () => done.fail('expected an error, not heroes'),
             error: (error) => {
                 expect(error.message).toContain('test 404 error');
                 done();

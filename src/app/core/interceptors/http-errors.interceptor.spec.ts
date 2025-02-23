@@ -4,15 +4,13 @@ import { HttpErrorsInterceptor } from './http-errors.interceptor';
 
 describe('HttpErrorsInterceptor', () => {
 
-    let interceptor: HttpErrorsInterceptor;
-
     beforeEach(() => {
         TestBed.configureTestingModule({
             providers: [
                 HttpErrorsInterceptor
             ]
         });
-        interceptor = TestBed.inject(HttpErrorsInterceptor);
+        TestBed.inject(HttpErrorsInterceptor);
     });
 
     it('should be created', () => {
