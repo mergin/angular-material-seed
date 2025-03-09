@@ -7,11 +7,24 @@ import {
     HttpContextToken,
     HttpErrorResponse
 } from '@angular/common/http';
-import { Observable, catchError, retry, tap, throwError, timeout } from 'rxjs';
+import { Observable, RetryConfig, catchError, retry, tap, throwError, timeout, timer } from 'rxjs';
 
 export const RETRY_COUNT = new HttpContextToken(() => 3);
 export const ERROR_COUNT = new HttpContextToken(() => 0);
 export const TIMEOUT_LIMIT = new HttpContextToken(() => 5000);
+export const DELAY = 200;
+
+export function backoffRetry<T>({ count, delay }: RetryConfig) {
+    return (obs$: Observable<T>) => obs$.pipe(
+        retry({
+            count,
+            delay: (_, retryIndex) => {
+                const d = Math.pow(2, retryIndex - 1) * (delay as number);
+                return timer(d);
+            }
+        })
+    );
+}
 
 @Injectable({ providedIn: 'root' })
 export class HttpErrorsInterceptor implements HttpInterceptor {
@@ -22,6 +35,10 @@ export class HttpErrorsInterceptor implements HttpInterceptor {
 
         const retryCount = request.context.get(RETRY_COUNT);
         const timeoutLimit = request.context.get(TIMEOUT_LIMIT);
+        const config: RetryConfig = {
+            count: retryCount,
+            delay: DELAY
+        };
 
         return next.handle(request)
             .pipe(
@@ -30,7 +47,7 @@ export class HttpErrorsInterceptor implements HttpInterceptor {
                     // An error has occurred, so increment this request's ERROR_COUNT.
                     error: () => request.context.set(ERROR_COUNT, request.context.get(ERROR_COUNT) + 1)
                 }),
-                retry(retryCount),
+                backoffRetry(config),
                 catchError(this.handleError<unknown>(request.method, request.urlWithParams, {}))
             );
     }
